@@ -19,7 +19,7 @@ export const FlashlightEffect = () => {
     }, []);
 
     return (
-        <div className="pointer-events-none fixed inset-0 z-30 transition-opacity duration-300">
+        <div className="pointer-events-none fixed inset-0 z-30 transition-opacity duration-300 hidden md:block">
             <motion.div
                 className="absolute inset-0 z-30 opacity-20"
                 animate={{

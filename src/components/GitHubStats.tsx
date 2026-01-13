@@ -1,32 +1,50 @@
 import { ActivityCalendar } from "react-activity-calendar";
-import React, { useMemo, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function GitHubStats() {
     const [mounted, setMounted] = useState(false);
+    const [data, setData] = useState<any[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [totalContributions, setTotalContributions] = useState(0);
 
     useEffect(() => {
         setMounted(true);
-    }, []);
 
-    // Generate mock data for the last 365 days
-    const mockData = useMemo(() => {
-        const data = [];
-        const now = new Date();
-        for (let i = 365; i >= 0; i--) {
-            const date = new Date(now);
-            date.setDate(date.getDate() - i);
+        async function fetchGitHubData() {
+            try {
+                const response = await fetch("https://github-contributions-api.jogruber.de/v4/Naveenp7");
+                const json = await response.json();
 
-            // Randomize activity: 30% chance of 0, else random level 1-4
-            const count = Math.random() > 0.4 ? Math.floor(Math.random() * 10) + 1 : 0;
-            const level = count === 0 ? 0 : count < 3 ? 1 : count < 6 ? 2 : count < 9 ? 3 : 4;
+                if (json.contributions) {
+                    const today = new Date();
 
-            data.push({
-                date: date.toISOString().split('T')[0],
-                count,
-                level,
-            });
+                    // 1. Sort by date ascending
+                    const sortedData = json.contributions.sort((a: any, b: any) =>
+                        new Date(a.date).getTime() - new Date(b.date).getTime()
+                    );
+
+                    // 2. Filter out future dates (important because API returns full current year)
+                    const pastData = sortedData.filter((activity: any) => {
+                        return new Date(activity.date) <= today;
+                    });
+
+                    // 3. Take the last 365 days from the actual past data
+                    const lastYearData = pastData.slice(-365);
+
+                    // 4. Calculate total manually to ensure label matches
+                    const total = lastYearData.reduce((acc: number, curr: any) => acc + curr.count, 0);
+
+                    setData(lastYearData);
+                    setTotalContributions(total);
+                }
+            } catch (error) {
+                console.error("Failed to fetch GitHub data", error);
+            } finally {
+                setLoading(false);
+            }
         }
-        return data;
+
+        fetchGitHubData();
     }, []);
 
     if (!mounted) {
@@ -44,29 +62,30 @@ export default function GitHubStats() {
             </div>
 
             <div className="w-full text-white overflow-hidden flex justify-center">
-                {/* 
-                Since we can't easily fetch real private data without a token proxy, 
-                we will use the public API for 'Naveenp7' if available. 
-                If the username is wrong or private, it might show empty.
-                For now, we use a mock set of data to GUARANTEE it looks good for the portfolio screenshot,
-                unless we confirm the user has public activity.
-                Let's try to use the component with standard configuration which fetches from public profile usually?
-                Actually react-activity-calendar requires data input. 
-                We need to fetch it.
-            */}
-                <div className="scale-75 md:scale-100 origin-center">
-                    <ActivityCalendar
-                        data={mockData}
-                        colorScheme="dark"
-                        theme={{
-                            dark: ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'],
-                        }}
-                        labels={{
-                            totalCount: '{{count}} contributions in the last year',
-                        }}
-                        showWeekdayLabels
-                    />
-                </div>
+                {loading ? (
+                    <div className="h-32 w-full flex items-center justify-center text-neutral-500 text-sm animate-pulse">
+                        Loading contributions...
+                    </div>
+                ) : (
+                    <div className="scale-75 md:scale-100 origin-center">
+                        {/* Check if data exists, otherwise show a fallback message or keep it empty */}
+                        {data.length > 0 ? (
+                            <ActivityCalendar
+                                data={data}
+                                colorScheme="dark"
+                                theme={{
+                                    dark: ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'],
+                                }}
+                                labels={{
+                                    totalCount: `${totalContributions} contributions in the last year`,
+                                }}
+                                showWeekdayLabels
+                            />
+                        ) : (
+                            <p className="text-neutral-500 text-sm">No activity data found.</p>
+                        )}
+                    </div>
+                )}
             </div>
 
             <div className="mt-6 flex flex-wrap gap-4 justify-center text-xs text-neutral-500 font-mono">

@@ -44,7 +44,7 @@ export const Globe = ({ className }: { className?: string }) => {
 
     return (
         <div
-            className={`relative flex items-center justify-center w-full max-w-[600px] h-[600px] mx-auto overflow-hidden ${className}`}
+            className={`relative flex items-center justify-center w-full max-w-[600px] h-[300px] md:h-[600px] mx-auto overflow-hidden ${className}`}
         >
             <div className="absolute inset-0 z-10 w-full h-full bg-transparent pointer-events-none" />
             <canvas
