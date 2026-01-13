@@ -13,6 +13,9 @@ export const metadata: Metadata = {
   description: "Portfolio of a high-tier developer building intelligent systems and elegant digital experiences.",
 };
 
+import { MatrixEffect } from "@/components/MatrixEffect";
+import { FlashlightEffect } from "@/components/ui/FlashlightEffect";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -23,6 +26,8 @@ export default function RootLayout({
       <body
         className={`${inter.className} bg-neutral-950 text-neutral-200 antialiased selection:bg-emerald-500/30 selection:text-emerald-200`}
       >
+        <MatrixEffect />
+        <FlashlightEffect />
         <SmoothScrolling />
         {children}
         <AIChat />
