@@ -60,7 +60,7 @@ export default function Skills() {
     ];
 
     return (
-        <section id="skills" className="py-24 bg-neutral-950">
+        <section id="skills" className="py-24 bg-neutral-950 w-full overflow-hidden">
             <div className="container px-6 mx-auto">
                 <div className="max-w-4xl mx-auto mb-16 flex flex-col md:flex-row items-center justify-between gap-8">
                     <div>

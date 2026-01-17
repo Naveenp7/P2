@@ -37,7 +37,7 @@ export default function Experience() {
     ];
 
     return (
-        <section id="experience" className="py-24 bg-neutral-950 relative">
+        <section id="experience" className="py-24 bg-neutral-950 relative w-full overflow-hidden">
             {/* Subtle background line */}
             <div className="absolute left-1/2 top-0 bottom-0 w-px bg-neutral-900 hidden md:block" />
 

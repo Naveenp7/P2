@@ -8,7 +8,7 @@ import { Globe } from "@/components/ui/Globe";
 
 export default function Contact() {
     return (
-        <section id="contact" className="py-24 bg-neutral-950 relative overflow-hidden">
+        <section id="contact" className="py-24 bg-neutral-950 relative w-full overflow-hidden">
             <div className="container px-6 mx-auto relative z-10">
                 <div className="flex flex-col md:flex-row items-center justify-between gap-12">
 

@@ -18,7 +18,7 @@ export function FloatingDock() {
     const mouseX = useMotionValue(Infinity);
 
     return (
-        <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-40 hidden md:flex h-16 items-end gap-4 rounded-2xl bg-neutral-900/50 border border-neutral-800/50 px-4 pb-3 pt-3 backdrop-blur-md shadow-2xl">
+        <div className="fixed bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 z-40 hidden md:flex h-16 items-end gap-4 rounded-2xl bg-neutral-900/50 border border-neutral-800/50 px-4 pb-3 pt-3 backdrop-blur-md shadow-2xl">
             {links.map((link) => (
                 <DockIcon key={link.title} mouseX={mouseX} {...link} />
             ))}

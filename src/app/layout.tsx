@@ -13,6 +13,16 @@ export const metadata: Metadata = {
   description: "Portfolio of a high-tier developer building intelligent systems and elegant digital experiences.",
 };
 
+import { Viewport } from "next";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  themeColor: "#0a0a0a",
+};
+
 import { MatrixEffect } from "@/components/MatrixEffect";
 import { FlashlightEffect } from "@/components/ui/FlashlightEffect";
 
@@ -24,15 +34,17 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${inter.className} bg-neutral-950 text-neutral-200 antialiased selection:bg-emerald-500/30 selection:text-emerald-200`}
+        className={`${inter.className} bg-neutral-950 text-neutral-200 antialiased selection:bg-emerald-500/30 selection:text-emerald-200 w-full overflow-x-hidden`}
       >
-        <MatrixEffect />
-        <FlashlightEffect />
-        <SmoothScrolling />
-        {children}
-        <AIChat />
-        <CommandMenu />
-        <FloatingDock />
+        <div className="relative w-full overflow-x-hidden">
+          <MatrixEffect />
+          <FlashlightEffect />
+          <SmoothScrolling />
+          {children}
+          <AIChat />
+          <CommandMenu />
+          <FloatingDock />
+        </div>
       </body>
     </html>
   );

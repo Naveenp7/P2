@@ -38,7 +38,7 @@ export default function Navbar() {
                 isScrolled ? "bg-black/80 backdrop-blur-md border-b border-white/5 py-4" : "bg-transparent py-6"
             )}
         >
-            <div className="container mx-auto px-6 flex items-center justify-between">
+            <div className="container mx-auto px-8 flex items-center justify-between">
                 <Link href="/" className="text-xl font-bold tracking-tighter text-white hover:text-emerald-400 transition-colors">
                     NAVEEN<span className="text-emerald-500">.</span>
                 </Link>

@@ -187,7 +187,7 @@ export default function Projects() {
     ];
 
     return (
-        <section id="projects" className="py-24 bg-neutral-950">
+        <section id="projects" className="py-24 bg-neutral-950 w-full overflow-hidden">
             <div className="container px-6 mx-auto">
                 <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
                     <div className="max-w-2xl">

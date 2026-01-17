@@ -32,7 +32,7 @@ export function CommandMenu() {
             {/* Floating Badge to hint shortcut */}
             <div
                 onClick={() => setOpen(true)}
-                className="fixed bottom-6 left-6 z-50 flex items-center gap-2 px-3 py-2 bg-neutral-900/80 backdrop-blur-md border border-neutral-800 rounded-lg text-xs text-neutral-400 cursor-pointer hover:text-white hover:border-neutral-700 transition-colors"
+                className="fixed bottom-8 left-8 z-50 flex items-center gap-2 px-3 py-2 bg-neutral-900/80 backdrop-blur-md border border-neutral-800 rounded-lg text-xs text-neutral-400 cursor-pointer hover:text-white hover:border-neutral-700 transition-colors"
             >
                 <div className="flex items-center gap-1">
                     <span className="text-lg">⌘</span>
